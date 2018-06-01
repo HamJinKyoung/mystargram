@@ -1,0 +1,110 @@
+  <header class="masthead">
+      <div class="container h-100">
+        <div class="row h-100">
+          <div class="col-lg-7 my-auto">
+            <div class="header-content mx-auto">
+              <h1 class="mb-5">Mystargram is a simple way to capture and share the world’s moments, or anything else!</h1>
+              <% if user_signed_in? %>
+                <p>현재 로그인 이메일 : <%= current_user.email %></p><br>
+                <a href="/users/sign_out" class="btn btn-outline btn-xl js-scroll-trigger">LogOut</a>
+              <% else %>
+                <a href="/users/sign_in" class="btn btn-outline btn-xl js-scroll-trigger">LogIn</a>
+              <%end%>
+            </div>
+          </div>
+          <div class="col-lg-5 my-auto">
+            <div class="device-container">
+              <div class="device-mockup iphone6_plus portrait white">
+                <div class="device">
+                  <div class="screen">
+                    <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
+                    <img src="/assets/demo-screen-1.jpg" class="img-fluid" alt="">
+                  </div>
+                  <div class="button">
+                    <!-- You can hook the "home button" to some JavaScript events or just remove it -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    
+  <section class="download bg-primary text-center" id="download">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 mx-auto">
+            <h2 class="section-heading">MYSTARGRAM!</h2>
+            <% if user_signed_in? %>
+            <p>NEW를 눌러 원하는 글을 자유롭게 쓰세요.</p>
+            <p>게시글 목록은 아래로 내리면 볼 수 있습니다.</p>
+            <div class="badges">
+              <a href='/home/new' class="btn btn-primary">NEW</a>
+            </div>
+            <% else %>
+              <p>게시글 목록은 아래로 내리면 볼 수 있습니다.</p>
+              <p>게시글 작성 및 수정은 로그인 했을 때만 가능합니다.</p>
+              <a href='/users/sign_in' class="btn btn-primary">로그인 하러가기!</a>
+            <%end%>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="features" id="features">
+      <div class="container">
+        <div class="section-heading text-center">
+          <h2>LIST</h2>
+          <p class="text-muted">게시글 목록입니다.</p>
+          <hr>
+        </div>
+        
+        <%@posts.each do |x|%>
+            <h3><%=x.title%></h3>
+            <p>작성자 : <%=x.user.name%></p>
+            
+            <% unless x.img_url.nil? %>
+              <img src="<%= x.img_url %>" />
+            <% end %>
+            
+            <p class="text-muted"><%=x.content%></p>
+            
+            <p>
+              <% x.hashtags.each do |tag| %>
+                <%= tag.name%>
+              <%end%>
+            </p>
+            
+            <p>작성시간 : <%= x.created_at.strftime("%Y년 %m월 %d일 %H시 %M분") %></p>
+            
+            <% if user_signed_in? %>
+            <a href='/home/edit/<%=x.id%>' class="btn btn-primary">edit</a>
+            <a href='/home/destroy/<%=x.id%>'class="btn btn-primary">delete</a>
+            <%end%>
+            <hr>
+            
+            <% x.comments.each do |c|%>
+              댓 글: <%=c.content%>
+              <a href = 'comments/delete/<%=c.id%>'>삭제</a><br>
+            <%end%>
+            <br>------------------------------------------------------------------------<br>
+            <form action = '/home/index/<%=x.id%>/create' method=post>
+              <%=hidden_field_tag :authenticity_token, form_authenticity_token %>
+              <input type='textarea' name='comment' placeholder="댓글입력">
+              <button type = 'submit' class ='btn btn-outline-primary'>댓글달기!</button>
+            </form>
+            <hr>
+        <%end%>
+      </div>
+    </section>
+    
+    <section class="cta">
+      <div class="cta-content">
+        <div class="container">
+          <h2>Don't worry.<br>Be happy.</h2>
+          <a href="/home/index" class="btn btn-outline btn-xl js-scroll-trigger">Let's Get Started!</a>
+        </div>
+      </div>
+      <div class="overlay"></div>
+    </section>

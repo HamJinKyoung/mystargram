@@ -1,0 +1,29 @@
+<div class="container">
+<section class="resume-section p-3 p-lg-5 d-flex d-column" id="new">
+    <div class="my-auto">
+      <h1 class="mb-0">edit
+      <span class="text-primary">board</span>
+      </h1>
+      <div class="subheading mb-5">게시글 수정</div>
+      <p>아래에 내용을 수정하고 '다시 저장!'버튼을 누르면 게시글이 수정됩니다.</p>
+
+    <form action='/home/update/<%= @post.id%>' method = 'post'>
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <div class="form-group">
+        <label for="exampleInputEmail1">제목을 입력하세요</label><br>
+        <input type='text' name='post_title' value=<%=@post.title %>>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">내용을 입력하세요</label><br>
+        <textarea name='post_content'><%= @post.content %></textarea>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">#해시태그는 띄어쓰기로 구분해주세요</label><br>
+        <input type='text' name='hashtags' value=<% @post.hashtags.each do |tag|%><%= tag.name%><%end%>>
+      </div>
+      
+      <button type="submit" class="btn btn-primary">다시 저장!</button>
+    </form>
+    </div>
+</section>
+</div>

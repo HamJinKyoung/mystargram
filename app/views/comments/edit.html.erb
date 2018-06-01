@@ -1,0 +1,15 @@
+<section class="resume-section p-3 p-lg-5 d-flex d-column" id="new">
+  <div class="my-auto">
+    <h1 class="mb-0">edit
+    <span class="text-primary">board</span>
+    </h1>
+    <div class="subheading mb-5">댓글 수정</div>
+    <p>아래에 내용을 수정하고 '댓글 다시 달기!'버튼을 누르면 댓글이 수정됩니다.</p>
+
+    <form action = '/comments/update/<%=@comment.id%>' method=post>
+      <%=hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <input type='textarea' name='comment' value = <%=@comment.content%>>
+      <button type = "submit" class ='btn btn-outline-primary'>댓글 다시 달기!</button>
+    </form>
+  </div>
+</section>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Mystargram</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  
+    <!-- Bootstrap core CSS -->
+    <link href="assets/stylesheet/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link rel="stylesheet" href="assets/stylesheet/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/stylesheet/simple-line-icons.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+
+    <!-- Plugin CSS -->
+    <link rel="stylesheet" href="assets/stylesheet/device-mockups.min.css">
+
+    <!-- Custom styles for this template -->
+    <link href="assets/stylesheet/new-age.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+ <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Mystargram</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="/home/index">Home</a>
+            </li>
+            <% if user_signed_in? %>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="/home/new">New</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="/users/sign_out">LogOut</a>
+            </li>
+            <%else%>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="/users/sign_in">LogIn</a>
+            </li>
+            <%end%>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    
+  <%= yield %>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="assets/javascript/jquery.min.js"></script>
+    <script src="assets/javascript/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="assets/javascript/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="assets/javascript/new-age.min.js"></script>
+</body>
+</html>
